@@ -19,6 +19,10 @@ app.get('/api/hello', (req, res) => {
 	res.json({ message: 'World' });
 });
 
+app.get('/api/goodbye', (req, res) => {
+	res.json({ message: 'World' });
+});
+
 // 404 fallback for client side routing
 if (isProduction) {
 	app.get('*', (req, res) => {
