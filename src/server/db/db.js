@@ -7,4 +7,14 @@ const pool = mysql.createPool({
     database: 'chirps'
 });
 
+pool.on('error', (err) => {
+    console.error('MySQL Pool Error:', err);
+});
+
+process.on('SIGINT', () => {
+    pool.end();
+    console.log('Database connection pool closed.');
+    process.exit();
+});
+
 module.exports = pool.promise();

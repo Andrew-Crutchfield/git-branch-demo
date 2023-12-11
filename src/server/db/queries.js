@@ -1,10 +1,14 @@
 const db = require('./db'); 
 
 const getAllChirps = async () => {
-    const [rows] = await db.query('SELECT * FROM chirps');
-    return rows;
-};
-
+    try {
+      const [rows] = await db.query('SELECT * FROM chirps');
+      return rows;
+    } catch (error) {
+      console.error('Error in getAllChirps:', error);
+      throw error;
+    }
+  };
 const getChirpById = async (chirpId) => {
     const [rows] = await db.query('SELECT * FROM chirps WHERE id = ?', [chirpId]);
     return rows;

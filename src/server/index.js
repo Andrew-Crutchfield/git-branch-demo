@@ -1,27 +1,31 @@
 const express = require('express');
-const cors = require('cors'); // If you're allowing cross-origin requests
-const chirpsRouter = require('./api/chirps'); // Import your chirps routes
+const cors = require('cors');
+const chirpsRouter = require('./api/chirps');
+const blogsRouter = require('./api/blogs');
 
 const app = express();
 
-// Middleware setup
-app.use(cors()); // Enable CORS if needed
-app.use(express.json()); // Parse JSON bodies
+app.use(cors());
+app.use(express.json());
 
-// Static files middleware (if you're serving any static files from express)
-app.use(express.static('path/to/public'));
+app.use('/api/chirps', chirpsRouter);
+app.use('/api/blogs', blogsRouter);
 
-// Routes setup
-app.use('/api/chirps', chirpsRouter); // Use chirps routes for path /api/chirps
-
-// Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+
+    if (err.name === 'ValidationError') {
+        res.status(400).json({ error: 'Validation failed', message: err.message });
+    } else {
+        res.status(500).json({ error: 'Internal Server Error', message: err.message });
+    }
 });
 
-// Server start
-const PORT = process.env.PORT || 3000; // Port from environment or default to 3000
+app.use((req, res) => {
+    res.status(404).json({ error: 'Not Found' });
+});
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
