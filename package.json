@@ -5,13 +5,12 @@
 	"main": "dist/server.js",
 	"scripts": {
 		"watch:client": "node esbuild-config/client.dev.mjs",
-		"watch:server": "node esbuild-config/server.dev.mjs",
-		"watch:restart-server": "nodemon --config nodemon.json",
-		"dev": "npm-run-all --parallel watch:*",
+		"watch:server": "nodemon index.js", 
+		"dev": "npm-run-all --parallel watch:client watch:server", 
 		"build:client": "node esbuild-config/client.prod.mjs",
 		"build:server": "node esbuild-config/server.prod.mjs",
 		"build": "npm-run-all --sequential build:*",
-		"start": "nodemon index.js"
+		"start": "node index.js" 
 	},
 	"keywords": [
 		"typescript",

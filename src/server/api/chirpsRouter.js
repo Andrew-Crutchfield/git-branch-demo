@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllChirps, getChirpById, createChirp } = require('../db/queries');
+const pool = require('../db'); // Make sure the path to db.js is correct
 
 router.post('/', async (req, res) => {
     try {
@@ -17,20 +17,20 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
 router.get('/', async (req, res) => {
     try {
-        const chirps = await getAllChirps();
-        res.status(200).json({ data: chirps });
+      const [chirps] = await pool.query('SELECT * FROM chirps');
+      res.status(200).json(chirps);
     } catch (error) {
-        console.error('Error getting chirps:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+      console.error('Error getting chirps:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
     }
 });
 
 router.delete('/:id', async (req, res) => {
     try {
         const chirpId = req.params.id;
-
         const existingChirp = await getChirpById(chirpId);
 
         if (!existingChirp) {
@@ -45,17 +45,4 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
-    try {
-        const { userId, text, location } = req.body;
-        
-        const result = await createChirp(userId, text, location);
-        
-        res.status(201).json({ message: 'Chirp created', chirpId: result.insertId });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-
-module.exports = router; 
+module.exports = router;
