@@ -1,7 +1,8 @@
-export interface Blog {
+
+export interface Chirp {
     id: number;
-    text: string;
-    location: string;
-    userId: number;
-    created_at: string;
+    user_id: number | null; 
+    body: string | null; 
+    location: string | null; 
+    created_at: string; 
 }

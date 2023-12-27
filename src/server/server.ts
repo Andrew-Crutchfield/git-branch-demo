@@ -1,11 +1,18 @@
-import express from "express";
-import indexRouter from "./routes";
+import express from 'express';
+import cors from 'cors';
+import chirpsRouter from './routes/chirps'; 
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
 
 app.use(express.json());
 
-app.use(indexRouter);
+app.use('/chirps', chirpsRouter);
 
-const PORT = process.env.PORT || 3000;
+app.get('/', (req, res) => {
+  res.send('Welcome to the Chirper API!');
+});
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
