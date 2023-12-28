@@ -27,4 +27,4 @@ pids
 *.log
 
 # Directory used by npm for cache
-.npm
+.npm.env
