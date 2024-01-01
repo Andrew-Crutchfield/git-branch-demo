@@ -21,7 +21,7 @@ const ChirpDetails: React.FC = () => {
 
     return (
         <div>
-            <h3>{chirp.content}</h3> // Make sure 'body' is the correct property name in your Chirp interface
+            <h3>{chirp.body}</h3> // Make sure 'body' is the correct property name in your Chirp interface
         </div>
     );
 };

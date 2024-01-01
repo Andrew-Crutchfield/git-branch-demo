@@ -24,7 +24,7 @@ const AdminChirps = () => {
         <div>
             {chirps.map((chirp) => (
                 <div key={chirp.id}>
-                    <p>{chirp.content}</p> // Update property name as per your Chirp interface
+                    <p>{chirp.body}</p> // Update property name as per your Chirp interface
                     <button onClick={() => handleEditChirp(chirp.id)}>Edit</button>
                     <button onClick={() => handleDeleteChirp(chirp.id)}>Delete</button>
                 </div>

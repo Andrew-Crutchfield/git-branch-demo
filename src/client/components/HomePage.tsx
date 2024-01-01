@@ -11,7 +11,7 @@ const HomePage: React.FC<HomePageProps> = ({ chirps }) => {
       {chirps.length > 0 ? (
         <ul>
           {chirps.map((chirp) => (
-            <li key={chirp.id}>{chirp.content}</li> 
+            <li key={chirp.id}>{chirp.body}</li> 
           ))}
         </ul>
       ) : (

@@ -1,13 +1,13 @@
 export interface User {
     id: number;
-    username: string;
+    handle: string;
     email: string;
 }
   
 export interface Chirp {
     id: number;
-    userId: number; 
-    content: string; 
+    user_id: number; 
+    body: string; 
     createdAt: string; 
 }
   

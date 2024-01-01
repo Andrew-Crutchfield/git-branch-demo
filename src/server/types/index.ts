@@ -6,3 +6,9 @@ export interface Chirp {
     location: string | null; 
     created_at: string; 
 }
+
+export interface User {
+    id: number;
+    handle: string;
+    email: string;
+}

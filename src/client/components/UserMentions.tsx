@@ -34,7 +34,7 @@ const UserMentions = () => {
                 <option value="">Select a user</option>
                 {users.map((user) => (
                     <option key={user.id} value={user.id.toString()}>
-                        {user.username} 
+                        {user.handle} 
                     </option>
                 ))}
             </select>
@@ -42,7 +42,7 @@ const UserMentions = () => {
             <div>
                 {mentions.map((chirp) => (
                     <div key={chirp.id}>
-                        <p>{chirp.content}</p> 
+                        <p>{chirp.body}</p> 
                     </div>
                 ))}
             </div>
